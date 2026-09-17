@@ -1,6 +1,13 @@
 LERNUHR – ENDRINGSLOGG
 Nyeste utgave står øverst. Utgaver før Git tilhører 1.x.
 
+2.0.2 – 2026-09-17
+------------------
+- Fjernet `analoguhr.html` og videresendingen for eldre bokmerker. Analogklokka har nå bare den kanoniske adressen `/lernuhr/`.
+- Ryddet den lokale serveroversikten og listen over produksjonsfiler.
+- Oppdatert versjonsnummer og hurtigbufferparametre.
+Kontroll: Automatiske tester, Git-diff og begge klokkesidene er kontrollert.
+
 2.0.1 – 2026-09-17
 ------------------
 - Endret hovedspørsmålet på begge klokkesidene fra «Hva er klokka?» til korrekt tysk: «Wie viel Uhr ist es?».

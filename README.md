@@ -30,7 +30,6 @@ Disse filene kopieres til servermappen:
 
 ```text
 index.html
-analoguhr.html
 digitaluhr.html
 styles.css
 theme.js
@@ -40,7 +39,7 @@ digital.js
 lernuhr-symbol.svg
 ```
 
-`analoguhr.html` videresender eldre bokmerker til hovedsiden. De opprinnelige PNG-bildene og faviconet er bevart i Git-historikken og brukes ikke av 2.0-grensesnittet.
+De opprinnelige PNG-bildene og faviconet er bevart i Git-historikken og brukes ikke av 2.0-grensesnittet.
 
 ## Struktur
 

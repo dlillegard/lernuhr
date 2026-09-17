@@ -59,7 +59,7 @@ test('begge sider har klokkevelger, tema og riktig versjon', () => {
     assert.match(html, /href="digitaluhr\.html"/);
     assert.match(html, /id="theme-toggle"/);
     assert.match(html, /<h1>Wie viel Uhr ist es\?<\/h1>/);
-    assert.match(html, /Versjon 2\.0\.1/);
+    assert.match(html, /Versjon 2\.0\.2/);
     assert.doesNotMatch(html, /fonts\.googleapis/);
   }
 });
