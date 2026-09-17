@@ -1,0 +1,203 @@
+<!-- Digital Lernuhr Version 1.7: Added Zufällige Zeit button -->
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Digital Lernuhr</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Lexend:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+      background: #fff;
+      color: #000;
+      font-family: 'Orbitron', monospace;
+    }
+    .frame {
+      background: #333;
+      border: 4px solid #000;
+      border-radius: 8px;
+      padding: 16px 32px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.7);
+      text-align: center;
+    }
+    .display {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 4rem;
+      background: #ccc;
+      padding: 8px 16px;
+      border: 2px inset #888;
+      color: #000;
+      letter-spacing: 2px;
+      min-width: 12ch;
+    }
+    .display .hour { color: #000; }
+    .display .minute { color: #f00; }
+    .display .second { color: gold; }
+    .controls {
+      display: flex;
+      justify-content: center;
+      gap: 32px;
+      margin: 16px 0;
+    }
+    .control-group {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .control-group button {
+      width: 2rem;
+      height: 2rem;
+      font-size: 1.2rem;
+      margin: 2px 0;
+      background: #444;
+      border: 1px solid #000;
+      color: #0ff;
+      cursor: pointer;
+    }
+    .control-label {
+      font-size: 1rem;
+      color: #0ff;
+      margin: 4px 0;
+    }
+    .btns {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+    .btn {
+      padding: 6px 12px;
+      font-size: 1rem;
+      cursor: pointer;
+      background: #444;
+      border: 1px solid #000;
+      border-radius: 4px;
+      color: #0ff;
+      transition: background 0.2s;
+    }
+    .btn.active { background: gold; color: #000; }
+    #textOutput {
+      margin-top: 8px;
+      font-size: 1.2rem;
+      min-height: 1.2em;
+      color: #000;
+      font-family: 'Lexend', sans-serif;
+      background: #eee;
+      padding: 8px 12px;
+      border-radius: 4px;
+      display: inline-block;
+    }
+    .hour-text { color: #000; font-weight: 700; }
+    .minute-text { color: #f00; font-weight: 700; }
+    footer {
+      margin-top: 8px;
+      font-size: 0.75rem;
+      color: #666;
+    }
+  </style>
+</head>
+<body>
+  <div class="frame">
+    <div class="display">
+      <span id="hour" class="hour">00</span>
+      <span>:</span>
+      <span id="minute" class="minute">00</span>
+      <span id="sec" class="second" style="display:none;">:00</span>
+    </div>
+    <div class="controls">
+      <div class="control-group">
+        <button id="hourUp">▲</button>
+        <span class="control-label">Stunden</span>
+        <button id="hourDown">▼</button>
+      </div>
+      <div class="control-group">
+        <button id="minUp">▲</button>
+        <span class="control-label">Minuten</span>
+        <button id="minDown">▼</button>
+      </div>
+    </div>
+    <div class="btns">
+      <button id="randBtn" class="btn">Zufällige Zeit</button>
+      <button id="toggleSys" class="btn active">Systemzeit</button>
+      <button id="toggleText" class="btn">Text</button>
+    </div>
+    <div id="textOutput"></div>
+  </div>
+  <footer>Lernuhr er frigitt under CC0. Utviklet og vedlikeholdt av Daniel Herman Lillegård.</footer>
+
+  <script>
+  (function(){
+    const hourEl = document.getElementById('hour');
+    const minEl = document.getElementById('minute');
+    const secEl = document.getElementById('sec');
+    const randBtn = document.getElementById('randBtn');
+    const toggleSys = document.getElementById('toggleSys');
+    const toggleText = document.getElementById('toggleText');
+    const textOut = document.getElementById('textOutput');
+    let auto = true, showText = false;
+    let h = 0, m = 0;
+    let interval;
+
+    function pad(v){ return v.toString().padStart(2,'0'); }
+    function updateDisplay(){
+      hourEl.textContent = pad(h);
+      minEl.textContent = pad(m);
+    }
+    function cardinal(n){
+      const map={0:'null',1:'eins',2:'zwei',3:'drei',4:'vier',5:'fünf',6:'sechs',7:'sieben',8:'acht',9:'neun',10:'zehn',11:'elf',12:'zwölf',13:'dreizehn',14:'vierzehn',15:'fünfzehn',16:'sechzehn',17:'siebzehn',18:'achtzehn',19:'neunzehn'};
+      const tensMap={20:'zwanzig',30:'dreißig',40:'vierzig',50:'fünfzig'};
+      if(n<20) return map[n];
+      const t=Math.floor(n/10)*10, u=n%10;
+      if(u===0) return tensMap[t];
+      const uStr = u===1? 'ein': map[u];
+      return uStr + 'und' + tensMap[t];
+    }
+    function updateText(){
+      if(showText){
+        const hourWord = cardinal(h);
+        let html = `<span class="hour-text">${hourWord}</span> Uhr`;
+        if(m !== 0){
+          const minWord = cardinal(m);
+          html += ` <span class="minute-text">${minWord}</span>.`;
+        } else {
+          html += '.';
+        }
+        textOut.innerHTML = html;
+      } else {
+        textOut.innerHTML = '';
+      }
+    }
+    function tick(){
+      const now = new Date(); h = now.getHours(); m = now.getMinutes();
+      updateDisplay();
+      if(auto){ secEl.style.display = ''; secEl.textContent = ':' + pad(now.getSeconds()); } else secEl.style.display = 'none';
+      updateText();
+    }
+    function startSys(){ auto = true; toggleSys.classList.add('active'); interval = setInterval(tick, 500); tick(); }
+    function stopSys(){ auto = false; toggleSys.classList.remove('active'); clearInterval(interval); secEl.style.display = 'none'; }
+    document.getElementById('hourUp').onclick = ()=>{ stopSys(); h = (h + 1) % 24; updateDisplay(); updateText(); };
+    document.getElementById('hourDown').onclick = ()=>{ stopSys(); h = (h + 23) % 24; updateDisplay(); updateText(); };
+    document.getElementById('minUp').onclick = ()=>{ stopSys(); m = (m + 1) % 60; updateDisplay(); updateText(); };
+    document.getElementById('minDown').onclick = ()=>{ stopSys(); m = (m + 59) % 60; updateDisplay(); updateText(); };
+    randBtn.onclick = ()=>{
+      stopSys();
+      h = Math.floor(Math.random() * 24);
+      m = Math.floor(Math.random() * 60);
+      updateDisplay();
+      updateText();
+    };
+    toggleSys.onclick = ()=> auto ? stopSys() : startSys();
+    toggleText.onclick = ()=>{ showText = !showText; toggleText.classList.toggle('active', showText); updateText(); };
+    startSys();
+  })();
+  </script>
+</body>
+</html>
