@@ -1,82 +1,74 @@
-<!DOCTYPE html>
-<html lang="no">
+<!doctype html>
+<html lang="nb">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Lernuhr</title>
-  <link rel="icon" type="image/png" sizes="64x64" href="favicon.png?v=1">
-
-  <!-- Google Font -->
-  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600&display=swap" rel="stylesheet">
-
-  <style>
-    body {
-      font-family: sans-serif;
-      text-align: center;
-      margin: 0;
-      padding: 2rem;
-      background-color: #f5f5f5;
-    }
-
-    h1 {
-      font-family: 'Fredoka', sans-serif;
-      font-size: 3rem;
-      margin-bottom: 2rem;
-      color: #222;
-      letter-spacing: 1px;
-    }
-
-    .container {
-      display: flex;
-      justify-content: center;
-      gap: 3rem;
-      flex-wrap: wrap;
-    }
-
-    .choice {
-      text-decoration: none;
-      color: black;
-      background: white;
-      padding: 1rem;
-      border-radius: 10px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-      width: 200px;
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
-    }
-
-    .choice:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 6px 14px rgba(0,0,0,0.15);
-    }
-
-    img {
-      width: 100%;
-      height: auto;
-      border-radius: 6px;
-    }
-
-    h2 {
-      margin: 0.5rem 0 0.2rem;
-    }
-  </style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#202520">
+  <meta name="description" content="Still en analog klokke og lær hvordan klokkeslettet uttrykkes på tysk.">
+  <title>Analoguhr – Lernuhr</title>
+  <script src="theme.js?v=2.0.0"></script>
+  <link rel="icon" href="lernuhr-symbol.svg?v=2.0.0" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css?v=2.0.0">
+  <script defer src="clock-core.js"></script>
+  <script defer src="analog.js"></script>
 </head>
 <body>
+  <a class="skip-link" href="#main">Hopp til innhold</a>
+  <header class="site-header">
+    <div class="wordmark"><img src="lernuhr-symbol.svg" alt="" width="512" height="512">Lernuhr</div>
+    <div class="header-controls">
+      <nav class="clock-nav" aria-label="Velg klokketype">
+        <a href="index.html" aria-current="page">Analoguhr</a>
+        <a href="digitaluhr.html">Digitaluhr</a>
+      </nav>
+      <button type="button" id="theme-toggle" class="theme-toggle" aria-label="Bruk mørkt tema" aria-pressed="false"><span class="moon" aria-hidden="true">☾</span><span class="sun" aria-hidden="true">☀</span></button>
+    </div>
+    <span class="language"><span class="german-flag" aria-hidden="true"></span> Vi øver på tysk</span>
+  </header>
 
-  <h1>Lernuhr</h1>
+  <main id="main">
+    <div class="page-heading">
+      <p class="eyebrow">ANALOG KLOKKE</p>
+      <h1>Hva er klokka?</h1>
+      <p>Dra viserne, velg en tilfeldig tid eller følg systemklokka. Vis teksten når du vil kontrollere svaret.</p>
+    </div>
 
-  <div class="container">
-    
-    <a href="analoguhr.html" class="choice">
-      <img src="analoguhr.png" alt="Analog klokke">
-      <h2>Analoguhr</h2>
-    </a>
+    <div class="clock-layout">
+      <section class="clock-card" aria-labelledby="analog-title">
+        <div class="card-heading">
+          <div><h2 id="analog-title">Analoguhr</h2><p>Dra nærmest den viseren du vil flytte.</p></div>
+          <span id="mode-label" class="pill">Systemzeit</span>
+        </div>
+        <div class="analog-stage">
+          <svg id="clock" class="analog-clock" viewBox="0 0 200 200" role="img" aria-label="Analog klokke">
+            <circle class="clock-face" cx="100" cy="100" r="95"/>
+            <g id="clock-marks"></g>
+            <g id="clock-numbers"></g>
+            <line id="hour-hand" class="clock-hand hour-hand" x1="100" y1="106" x2="100" y2="59"/>
+            <line id="minute-hand" class="clock-hand minute-hand" x1="100" y1="108" x2="100" y2="39"/>
+            <line id="second-hand" class="clock-hand second-hand" x1="100" y1="112" x2="100" y2="27"/>
+            <circle class="center-ring" cx="100" cy="100" r="6"/>
+            <circle class="center-dot" cx="100" cy="100" r="2.5"/>
+          </svg>
+        </div>
+      </section>
 
-    <a href="digitaluhr.html" class="choice">
-      <img src="digitaluhr.png" alt="Digital klokke">
-      <h2>Digitaluhr</h2>
-    </a>
+      <aside class="control-panel" aria-labelledby="controls-title">
+        <div><p class="eyebrow">ØVING</p><h2 id="controls-title">Still klokka</h2><p class="panel-intro">Tenk gjennom hvordan tiden uttrykkes på tysk før du viser teksten.</p></div>
+        <div class="actions">
+          <button type="button" id="random-time" class="button primary">Zufällige Zeit <span aria-hidden="true">↻</span></button>
+          <button type="button" id="system-time" class="button secondary is-active" aria-pressed="true">Systemzeit</button>
+          <button type="button" id="toggle-text" class="button secondary" aria-pressed="false">Text anzeigen</button>
+        </div>
+        <div class="answer-box" aria-live="polite">
+          <span>AUF DEUTSCH</span>
+          <p id="time-text" class="is-hidden">Den tyske teksten er skjult.</p>
+        </div>
+        <p class="tip"><span aria-hidden="true">↔</span> Timeviseren følger minuttene slik den gjør på en virkelig klokke.</p>
+      </aside>
+    </div>
+  </main>
 
-  </div>
-
+  <footer><span>Lernuhr <span class="footer-dot">·</span> Laget av Daniel Herman Lillegård</span><span>Versjon 2.0</span><span>Fri å bruke <span class="footer-dot">·</span> CC0</span></footer>
 </body>
 </html>

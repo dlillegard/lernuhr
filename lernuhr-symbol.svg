@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="title desc">
+  <title id="title">Lernuhr</title>
+  <desc id="desc">En stilisert klokke med time- og minuttviser</desc>
+  <rect width="512" height="512" rx="130" fill="#f9c443"/>
+  <circle cx="256" cy="256" r="155" fill="#ffe7a0" stroke="#202520" stroke-width="30"/>
+  <g fill="#202520">
+    <circle cx="256" cy="256" r="20"/>
+    <rect x="242" y="137" width="28" height="126" rx="14"/>
+    <path d="M245 249a18 18 0 0 1 25-4l91 65a18 18 0 1 1-21 29l-91-65a18 18 0 0 1-4-25Z"/>
+    <rect x="248" y="82" width="16" height="28" rx="8"/>
+    <rect x="248" y="402" width="16" height="28" rx="8"/>
+    <rect x="402" y="248" width="28" height="16" rx="8"/>
+    <rect x="82" y="248" width="28" height="16" rx="8"/>
+  </g>
+</svg>

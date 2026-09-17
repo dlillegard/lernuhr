@@ -1,0 +1,22 @@
+LERNUHR – ENDRINGSLOGG
+Nyeste utgave står øverst. Utgaver før Git tilhører 1.x.
+
+2.0 – 2026-09-17
+----------------
+- Skrevet Lernuhr på nytt som separate HTML-, CSS- og JavaScript-filer uten eksterne avhengigheter eller byggeprosess.
+- Fjernet den separate valgsiden; hovedadressen åpner Analoguhr og toppfeltet bytter mellom Analoguhr og Digitaluhr.
+- Beholdt systemtid, sekundvisning, tilfeldig tid og skjulbar tysk tekst på begge klokker.
+- Beholdt drahåndtering for begge analoge visere og separate justeringsknapper med omløp for digitale timer og minutter.
+- Beholdt muntlige analoge tidsuttrykk og direkte digital opplesning med tyske tallord.
+- Innført responsiv profil i samme stil som Gloseøving og Flashcards, med eget symbol, «Vi øver på tysk» og lyst/mørkt tema.
+- Deler temavalg med de andre appene gjennom `dlillegard:theme`.
+- Lagt til lokal server, dokumentasjon, prosjektregler og automatiske tester.
+- Beholder `analoguhr.html` som videresending for eldre bokmerker.
+- Satt første utgave etter omskrivingen til versjon 2.0.0.
+Kontroll: Tyske tallord, analoge uttrykk, normalisering, tilfeldige tider og skriptlasting er dekket av tester. Begge klokker, alle kontroller og lyst/mørkt tema er kontrollert på bred og smal skjerm.
+
+1.x – før Git (nøyaktige versjoner og datoer ikke samlet)
+--------------------------------------------------------
+- Separat forside med valg mellom Analoguhr og Digitaluhr.
+- Analoguhr 2.9 med systemtid, drahåndtering, tilfeldig tid og muntlige tyske tidsuttrykk.
+- Digitaluhr 1.7 med 24-timers systemtid, justeringsknapper, tilfeldig tid og direkte tyske tallord.

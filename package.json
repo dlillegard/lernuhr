@@ -1,0 +1,12 @@
+{
+  "name": "lernuhr",
+  "version": "2.0.0",
+  "private": true,
+  "type": "module",
+  "license": "CC0-1.0",
+  "description": "Interaktive analoge og digitale klokker for tyskundervisning.",
+  "scripts": {
+    "start": "node server.mjs",
+    "test": "node --test"
+  }
+}
