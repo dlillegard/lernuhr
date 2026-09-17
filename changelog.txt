@@ -1,6 +1,12 @@
 LERNUHR – ENDRINGSLOGG
 Nyeste utgave står øverst. Utgaver før Git tilhører 1.x.
 
+2.0.1 – 2026-09-17
+------------------
+- Endret hovedspørsmålet på begge klokkesidene fra «Hva er klokka?» til korrekt tysk: «Wie viel Uhr ist es?».
+- Oppdatert versjonsnummer og hurtigbufferparametre.
+Kontroll: Automatiske tester, Git-diff og begge klokkesidene er kontrollert.
+
 2.0 – 2026-09-17
 ----------------
 - Skrevet Lernuhr på nytt som separate HTML-, CSS- og JavaScript-filer uten eksterne avhengigheter eller byggeprosess.
